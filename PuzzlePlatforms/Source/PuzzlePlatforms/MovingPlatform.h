@@ -28,4 +28,7 @@ protected:
 private:
 	UPROPERTY(EditAnywhere)
 	int MovementSpeed = 25;
+
+	FVector GlobalTargetLocation;
+	FVector GlobalStartLocation;
 };
