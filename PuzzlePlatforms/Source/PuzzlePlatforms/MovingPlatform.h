@@ -19,10 +19,13 @@ public:
 
 	virtual void BeginPlay() override;
 
+	UPROPERTY(EditAnywhere, Meta = (MakeEditWidget = true))
+	FVector TargetLocation;
+
 protected:
 	virtual void Tick(float DeltaTime) override;
 
 private:
-	UPROPERTY(EditAnywhere, Category = "Movement")
+	UPROPERTY(EditAnywhere)
 	int MovementSpeed = 25;
 };
