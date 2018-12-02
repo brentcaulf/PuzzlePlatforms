@@ -9,6 +9,21 @@ AMovingPlatform::AMovingPlatform()
 	SetMobility(EComponentMobility::Movable);
 }
 
+void AMovingPlatform::BeginPlay()
+{
+	Super::BeginPlay();
+	
+	// if this is called on the server (HasAuthority), replicate the actor and it's movement
+	if (HasAuthority())
+	{
+		// replicates the entire actor
+		SetReplicates(true);
+		// replicate the actor's movement
+		SetReplicateMovement(true);
+	}
+	
+}
+
 void AMovingPlatform::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
