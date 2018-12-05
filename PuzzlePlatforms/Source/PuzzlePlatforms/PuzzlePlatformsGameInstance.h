@@ -31,6 +31,9 @@ public:
 	UFUNCTION(Exec)
 	void LoadMainMenu() override;
 
+	UFUNCTION()
+	void ExitGame() override;
+
 	UFUNCTION(BlueprintCallable)
 	void LoadMenu();
 

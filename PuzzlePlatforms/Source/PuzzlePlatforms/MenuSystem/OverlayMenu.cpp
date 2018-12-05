@@ -15,6 +15,9 @@ bool UOverlayMenu::Initialize()
 	if (!ensure(MainMenuOverlayMenuButton != nullptr)) return false;
 	MainMenuOverlayMenuButton->OnClicked.AddDynamic(this, &UOverlayMenu::LoadMainMenu);
 
+	if (!ensure(ExitOverlayMenuButton != nullptr)) return false;
+	ExitOverlayMenuButton->OnClicked.AddDynamic(this, &UOverlayMenu::ExitGame);
+
 	return true;
 }
 
@@ -30,3 +33,12 @@ void UOverlayMenu::LoadMainMenu()
 		MenuInterface->LoadMainMenu();
 	}
 }
+
+void UOverlayMenu::ExitGame()
+{
+	if (MenuInterface != nullptr)
+	{
+		MenuInterface->ExitGame();
+	}
+}
+

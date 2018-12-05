@@ -22,10 +22,15 @@ private:
 	void CancelMenu();
 	UFUNCTION()
 	void LoadMainMenu();
+	UFUNCTION()
+	void ExitGame();
 
 	UPROPERTY(meta = (BindWidget))
 	class UButton* CancelOverlayMenuButton;
 
 	UPROPERTY(meta = (BindWidget))
 	class UButton* MainMenuOverlayMenuButton;
+	
+	UPROPERTY(meta = (BindWidget))
+	class UButton* ExitOverlayMenuButton;
 };
