@@ -31,8 +31,13 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void LoadMenu();
 
+	UFUNCTION(BlueprintCallable)
+	void LoadOverlayMenu();
+
 private:
-	TSubclassOf<class UUserWidget> MenuClass;
+	TSubclassOf<class UUserWidget> MenuClass;	
+	TSubclassOf<class UUserWidget> OverlayClass;
 
 	class UMainMenu* Menu;
+	class UOverlayMenu* Overlay;
 };

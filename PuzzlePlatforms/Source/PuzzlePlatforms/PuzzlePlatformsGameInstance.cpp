@@ -9,6 +9,7 @@
 
 #include "PlatformTrigger.h"
 #include "MenuSystem/MainMenu.h"
+#include "MenuSystem/OverlayMenu.h"
 
 UPuzzlePlatformsGameInstance::UPuzzlePlatformsGameInstance(const FObjectInitializer & ObjectInitializer)
 {
@@ -16,11 +17,17 @@ UPuzzlePlatformsGameInstance::UPuzzlePlatformsGameInstance(const FObjectInitiali
 	if (!ensure(MenuBPClass.Class != nullptr)) return;
 
 	MenuClass = MenuBPClass.Class;
+
+	ConstructorHelpers::FClassFinder<UUserWidget> OverlayBPClass(TEXT("/Game/MenuSystem/WBP_OverlayMenu"));
+	if (!ensure(OverlayBPClass.Class != nullptr)) return;
+
+	OverlayClass = OverlayBPClass.Class;
 }
 
 void UPuzzlePlatformsGameInstance::Init()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Found class %s"), *MenuClass->GetName());
+	UE_LOG(LogTemp, Warning, TEXT("Found class %s"), *OverlayClass->GetName());
 }
 
 void UPuzzlePlatformsGameInstance::Host()
@@ -44,6 +51,12 @@ void UPuzzlePlatformsGameInstance::Host()
 
 void UPuzzlePlatformsGameInstance::Join(const FString & Address)
 {
+	// Commented out since the TearDown function was replaced in the MainMenu with OnLevelRemovedFromWorld
+	/*if (Menu != nullptr)
+	{
+		Menu->Teardown();
+	}*/
+	
 	UEngine* Engine = GetEngine();
 	if (!ensure(Engine != nullptr)) return;
 
@@ -65,4 +78,16 @@ void UPuzzlePlatformsGameInstance::LoadMenu()
 	Menu->Setup();
 
 	Menu->SetMenuInterface(this);
+}
+
+void UPuzzlePlatformsGameInstance::LoadOverlayMenu()
+{
+	if (!ensure(OverlayClass != nullptr)) return;
+
+	Overlay = CreateWidget<UOverlayMenu>(this, OverlayClass);
+	if (!ensure(Overlay != nullptr)) return;
+
+	Overlay->Setup();
+
+	Overlay->SetMenuInterface(this);
 }
