@@ -20,8 +20,8 @@ public:
 
 	void Setup();
 
-	//Commented out and replaced with OnLevelRemovedFromWorld which does the same thing, but better
-	//void Teardown();
+	void Teardown();
+
 protected:
 	virtual void OnLevelRemovedFromWorld(ULevel* InLevel, UWorld* InWorld) override;
 
